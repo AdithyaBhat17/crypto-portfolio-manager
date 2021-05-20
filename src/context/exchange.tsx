@@ -6,7 +6,11 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Currency, getUserCurrency, setUserCurrency } from "../lib/currency";
+import {
+  Currency,
+  getUserCurrency,
+  setUserCurrency,
+} from "../lib/exchangeRates";
 
 const CurrencyContext = createContext<{
   currency: Currency;

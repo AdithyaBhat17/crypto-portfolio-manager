@@ -2,8 +2,8 @@ import { Flex, Heading, HStack, List, ListItem } from "@chakra-ui/layout";
 import { useMediaQuery } from "@chakra-ui/media-query";
 import { Select } from "@chakra-ui/select";
 import { ChangeEvent } from "react";
-import { useCurrency } from "../context/exchange";
-import { SUPPORTED_CURRENCIES, Currency } from "../lib/currency";
+import { useCurrency } from "../../context/exchange";
+import { SUPPORTED_CURRENCIES, Currency } from "../../lib/exchangeRates";
 
 function Navbar() {
   const { currency, setCurrency } = useCurrency();
