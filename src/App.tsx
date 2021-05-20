@@ -1,19 +1,22 @@
 import { Suspense } from "react";
-import Layout from "./components/Layout";
-import Loading from "./components/Loading";
-import Navbar from "./components/Navbar";
-import TopCurrencies from "./components/TopCurrencies";
-import Footer from "./components/Footer";
+import Layout from "./components/common/Layout";
+import Loading from "./components/common/Loading";
+import Navbar from "./components/common/Navbar";
+import PortfolioManager from "./components/portfolio-manager";
+import Footer from "./components/common/Footer";
 import { CurrencyProvider } from "./context/exchange";
+import ErrorBoundary from "./components/errors/ErrorBoundary";
 
 function App() {
   return (
     <Layout>
       <CurrencyProvider>
         <Navbar />
-        <Suspense fallback={<Loading />}>
-          <TopCurrencies />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <PortfolioManager />
+          </Suspense>
+        </ErrorBoundary>
       </CurrencyProvider>
       <Footer />
     </Layout>

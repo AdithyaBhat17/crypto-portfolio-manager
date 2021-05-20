@@ -1,4 +1,4 @@
-import { data } from "../lib/topCryptoCurrencies";
+import { data } from "../lib/topCryptoCurrencies__mock__";
 
 export type CryptoListLatest = {
   data: {
