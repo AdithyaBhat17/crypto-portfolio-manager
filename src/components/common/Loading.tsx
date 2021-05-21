@@ -7,6 +7,7 @@ function Loading() {
       direction="column"
       alignItems="center"
       justifyContent="center"
+      aria-label="loading"
       height={{ base: "80vh", md: "50vh" }}
     >
       <Player

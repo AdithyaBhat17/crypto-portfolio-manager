@@ -18,7 +18,7 @@ interface Props {
   currency: CryptoListLatest["data"][number];
   editMode: boolean;
   setUpdateId: React.Dispatch<React.SetStateAction<number | null>>;
-  holdings: { [key: string]: string } | null;
+  holding: string | null;
   updateHoldings: (id: number, units: number) => Promise<void>;
 }
 
@@ -26,7 +26,7 @@ function TopCurrencies({
   currency,
   editMode,
   setUpdateId,
-  holdings,
+  holding,
   updateHoldings,
 }: Props) {
   // exchange rate
@@ -62,11 +62,20 @@ function TopCurrencies({
             mr="0"
             maxW="5rem"
             size="xs"
-            defaultValue={holdings?.[currency.id] || ""}
+            defaultValue={holding || ""}
             min={0}
             onBlur={(e) => updateHoldings(currency.id, Number(e.target.value))}
           >
-            <NumberInputField autoFocus />
+            <NumberInputField
+              autoFocus
+              onKeyDown={(e) =>
+                e.key === "Enter" &&
+                updateHoldings(
+                  currency.id,
+                  Number((e.target as EventTarget & { value: string }).value)
+                )
+              }
+            />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -81,7 +90,7 @@ function TopCurrencies({
             onClick={() => setUpdateId(currency.id)}
             alignItems="center"
           >
-            <span>{holdings?.[currency.id] ?? "-"}</span>
+            <span>{holding || "-"}</span>
 
             <IconButton
               size="sm"

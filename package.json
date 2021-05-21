@@ -25,8 +25,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --detectOpenHandles -u",
+    "test:coverage": "yarn test --coverage --watchAll=false --silent",
+    "build": "yarn test:coverage && set GENERATE_SOURCEMAP=false && react-scripts build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -34,6 +35,21 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.(ts|tsx)", "src/App.tsx"],
+    "coveragePathIgnorePatterns": [
+      "src/index.tsx",
+      "src/*.config.js",
+      "src/(theme|reportWebVitals).ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 80,
+        "functions": 80,
+        "lines": 80
+      }
+    }
   },
   "browserslist": {
     "production": [
@@ -46,5 +62,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-canvas-mock": "^2.3.1",
+    "msw": "^0.28.2"
   }
 }
