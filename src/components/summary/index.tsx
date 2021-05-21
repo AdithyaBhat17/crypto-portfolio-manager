@@ -63,9 +63,7 @@ function Summary({ holdings, currencies }: Props) {
           />
           <SummaryCard
             title="Cryptos Invested"
-            value={
-              Object.keys(holdings).filter((h) => holdings[h] !== "0").length
-            }
+            value={Object.values(holdings).filter(Boolean).length}
           />
           <SummaryCard
             title="Market Cap"
