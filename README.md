@@ -2,6 +2,8 @@ This repository consists the codebase for a simple crypto portfolio manager that
 
 You can try it live at https://mudrex.adithyabhat.com
 
+https://user-images.githubusercontent.com/20818481/119133236-49538c80-ba59-11eb-80ff-f3d414d45da7.mp4
+
 ## Installation
 
 ### 1. Pre-requisites
@@ -41,3 +43,11 @@ I've used React hooks to manage local state and SWR to manage server state. SWR 
 4. [SWR](http://swr.vercel.app)
 5. [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 6. [Mock Service Workers](https://mswjs.io/) (For unit tests only)
+
+## Code Coverage Report
+
+![CleanShot 2021-05-21 at 14 14 57@2x](https://user-images.githubusercontent.com/20818481/119133693-d1d22d00-ba59-11eb-83f8-be14b376f0db.png)
+
+## Deployments
+
+![image](https://user-images.githubusercontent.com/20818481/119133580-b2d39b00-ba59-11eb-93ae-86de13afc899.png)
