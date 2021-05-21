@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+This repository consists the codebase for a simple crypto portfolio manager that lists top 100 cryptocurrencies by Market cap. You can edit the number of coins you hold and check your portfolio's value.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can try it live at https://mudrex.adithyabhat.com
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+### 1. Pre-requisites
 
-### `yarn start`
+- Node.js runtime (>14.x preferred)
+- A Package Manager (Node/Yarn/PNPM)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 2. Development Environment Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Client**
 
-### `yarn test`
+- Clone this repo `git clone [https://github.com/AdithyaBhat17/crypto-portfolio-manager](https://github.com/AdithyaBhat17/crypto-manager-proxy)`
+- Open the .env file and edit the `REACT_APP_API_URL` value to match the URL of your proxy server (Learn how to set up a proxy server below).
+- Start the development server using `yarn start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Server**
 
-### `yarn build`
+- Clone [https://github.com/AdithyaBhat17/crypto-manager-proxy](https://github.com/AdithyaBhat17/crypto-manager-proxy)
+- Login to [https://pro.coinmarketcap.com/api/v1](https://pro.coinmarketcap.com/api/v1) and copy your API Key.
+- Paste your API Key in `crypto-manager-proxy/.env`
+- Run `yarn start` to get the proxy server up and running.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## State management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I follow this idea of keeping the application and server (Data from external sources) state separate.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+I've used React hooks to manage local state and SWR to manage server state. SWR provides a better user experience by showing stale data to the users and fetching the latest data in the background. If the newly fetched data is different from the cached data, the cache is flushed and replaced with this newly fetched data. SWR also allows us to show the latest data possible when users switch to a different tab and return to the application. (Check out [https://swr.now.sh](https://swr.now.sh/) for more details.)
 
-### `yarn eject`
+![mudrex-state-management](https://user-images.githubusercontent.com/20818481/119126435-a8f96a00-ba50-11eb-9b37-20d73d550ed6.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Libraries Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. [React](http://reactjs.org)
+2. [Chakra UI](http://chakra-ui.com)
+3. [Lottie Files](https://lottiefiles.com/)
+4. [SWR](http://swr.vercel.app)
+5. [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+6. [Mock Service Workers](https://mswjs.io/) (For unit tests only)
