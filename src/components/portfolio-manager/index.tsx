@@ -29,23 +29,19 @@ function TopCurrencies() {
     revalidateOnFocus: false,
   });
 
-  const updateHoldings = useCallback(
-    async (id: number, units: number) => {
-      if (!id) return;
-      // Here I had to mutate data to prevent each and every row from re-rendering,
-      // since each row requires holdings prop.
-      let currentHoldings = holdings;
-      if (!currentHoldings) {
-        currentHoldings = { [id]: units.toString() };
-      } else {
-        if (units === 0) delete currentHoldings[id];
-        else currentHoldings[id] = units.toString();
-      }
-      setHoldings(currentHoldings);
-      setUpdateId(null);
-    },
-    [holdings]
-  );
+  const updateHoldings = useCallback(async (id: number, units: number) => {
+    if (!id) return;
+    let currentHoldings = holdings;
+    if (!currentHoldings) {
+      currentHoldings = { [id]: units.toString() };
+    } else {
+      if (units === 0) delete currentHoldings[id];
+      else currentHoldings[id] = units.toString();
+    }
+    setHoldings({ ...currentHoldings });
+    setUpdateId(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (error || (list && !list.data)) {
     return (
@@ -81,7 +77,7 @@ function TopCurrencies() {
                 editMode={updateId === currency.id}
                 setUpdateId={setUpdateId}
                 currency={currency}
-                holdings={holdings}
+                holding={holdings?.[currency.id] || null}
                 updateHoldings={updateHoldings}
               />
             ))}

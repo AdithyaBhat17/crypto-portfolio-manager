@@ -1,6 +1,6 @@
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
-const URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+export const URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 export async function fetcher(
   endpoint: string,

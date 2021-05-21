@@ -19,7 +19,12 @@ function SummaryCard({ title, value }: Props) {
     >
       <Stack>
         <Text isTruncated>{title}</Text>
-        <Heading isTruncated color="purple" size="md">
+        <Heading
+          data-testid={title.toLowerCase() + "-current-value"}
+          isTruncated
+          color="purple"
+          size="md"
+        >
           {value}
         </Heading>
       </Stack>

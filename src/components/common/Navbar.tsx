@@ -38,6 +38,7 @@ function Navbar() {
           </ListItem>
           <ListItem>
             <Select
+              aria-label="exchange-currency"
               cursor="pointer"
               onChange={updateCurrency}
               variant="filled"
