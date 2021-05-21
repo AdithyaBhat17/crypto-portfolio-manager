@@ -15,14 +15,14 @@ https://user-images.githubusercontent.com/20818481/119133236-49538c80-ba59-11eb-
 
 **Client**
 
-- Clone this repo `git clone [https://github.com/AdithyaBhat17/crypto-portfolio-manager](https://github.com/AdithyaBhat17/crypto-manager-proxy)`
+- Clone this repo `git clone https://github.com/AdithyaBhat17/crypto-portfolio-manager`
 - Open the .env file and edit the `REACT_APP_API_URL` value to match the URL of your proxy server (Learn how to set up a proxy server below).
 - Start the development server using `yarn start`
 
 **Server**
 
-- Clone [https://github.com/AdithyaBhat17/crypto-manager-proxy](https://github.com/AdithyaBhat17/crypto-manager-proxy)
-- Login to [https://pro.coinmarketcap.com/api/v1](https://pro.coinmarketcap.com/api/v1) and copy your API Key.
+- Clone https://github.com/AdithyaBhat17/crypto-manager-proxy
+- Login to https://pro.coinmarketcap.com/api/v1 and copy your API Key.
 - Paste your API Key in `crypto-manager-proxy/.env`
 - Run `yarn start` to get the proxy server up and running.
 
