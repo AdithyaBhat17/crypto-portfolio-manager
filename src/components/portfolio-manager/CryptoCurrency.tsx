@@ -9,7 +9,7 @@ import {
   NumberInputStepper,
 } from "@chakra-ui/number-input";
 import { Td, Tr } from "@chakra-ui/table";
-import { memo } from "react";
+import { memo, useCallback, useRef } from "react";
 import { useCurrency } from "../../context/exchange";
 import { SUPPORTED_CURRENCIES } from "../../lib/exchangeRates";
 import { CryptoListLatest } from "../../types/api";
@@ -18,8 +18,12 @@ interface Props {
   currency: CryptoListLatest["data"][number];
   editMode: boolean;
   setUpdateId: React.Dispatch<React.SetStateAction<number | null>>;
-  holding: string | null;
-  updateHoldings: (id: number, units: number) => Promise<void>;
+  holding?: string | null;
+  setHoldings: React.Dispatch<
+    React.SetStateAction<{
+      [key: string]: string;
+    } | null>
+  >;
 }
 
 function TopCurrencies({
@@ -27,10 +31,29 @@ function TopCurrencies({
   editMode,
   setUpdateId,
   holding,
-  updateHoldings,
+  setHoldings,
 }: Props) {
   // exchange rate
   const { currency: userCurrency } = useCurrency();
+
+  // To avoid each row from re-rendering every time a row has been updated,
+  // store the holding that needs to be updated in the ref.
+  const holdingRef = useRef(holding);
+
+  const updateHoldings = useCallback(
+    async (id: number, units: number) => {
+      if (!id) return;
+
+      if (units === 0) holdingRef.current = null;
+      else holdingRef.current = Math.abs(units).toString();
+      setHoldings((currentHoldings) => ({
+        ...currentHoldings,
+        [id]: holdingRef.current,
+      }));
+      setUpdateId(null);
+    },
+    [setHoldings, setUpdateId]
+  );
 
   return (
     <Tr my="0" bgColor="white" _hover={{ bgColor: "#f2f2f2" }}>

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 import { Table, Tbody, Thead } from "@chakra-ui/table";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../lib/fetcher";
 import { CryptoListLatest } from "../../types/api";
@@ -29,20 +29,6 @@ function TopCurrencies() {
     revalidateOnFocus: false,
   });
 
-  const updateHoldings = useCallback(async (id: number, units: number) => {
-    if (!id) return;
-    let currentHoldings = holdings;
-    if (!currentHoldings) {
-      currentHoldings = { [id]: units.toString() };
-    } else {
-      if (units === 0) delete currentHoldings[id];
-      else currentHoldings[id] = units.toString();
-    }
-    setHoldings({ ...currentHoldings });
-    setUpdateId(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   if (error || (list && !list.data)) {
     return (
       <ErrorMessage message="Failed to fetch today's top 100 cryptocurrencies" />
@@ -53,8 +39,7 @@ function TopCurrencies() {
 
   return (
     <>
-      {holdings &&
-      Object.keys(holdings).filter((h) => holdings[h] !== "0").length ? (
+      {holdings && Object.values(holdings).filter(Boolean).length ? (
         <Summary holdings={holdings} currencies={list.data} />
       ) : null}
       <Box
@@ -77,8 +62,9 @@ function TopCurrencies() {
                 editMode={updateId === currency.id}
                 setUpdateId={setUpdateId}
                 currency={currency}
+                // holdings={holdings}
                 holding={holdings?.[currency.id] || null}
-                updateHoldings={updateHoldings}
+                setHoldings={setHoldings}
               />
             ))}
           </Tbody>
@@ -88,4 +74,4 @@ function TopCurrencies() {
   );
 }
 
-export default TopCurrencies;
+export default memo(TopCurrencies);
