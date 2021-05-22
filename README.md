@@ -1,4 +1,4 @@
-This repository consists the codebase for a simple crypto portfolio manager that lists top 100 cryptocurrencies by Market cap. You can edit the number of coins you hold and check your portfolio's value.
+This repository contains the codebase for a simple crypto portfolio manager that lists top 100 cryptocurrencies by Market cap. You can edit the number of coins you hold and check your portfolio's value.
 
 You can try it live at https://mudrex.adithyabhat.com
 
