@@ -7,10 +7,8 @@ export const SUPPORTED_CURRENCIES = {
 
 export type Currency = keyof typeof SUPPORTED_CURRENCIES;
 
-const CURRENCY_KEYS = Object.keys(SUPPORTED_CURRENCIES)
-
 function isValidCurrency(currency: any): asserts currency is Currency {
-  if (CURRENCY_KEYS.indexOf(currency) === -1)
+  if (!(currency in SUPPORTED_CURRENCIES))
     throw new TypeError(`${currency} is not supported`);
   return;
 }
