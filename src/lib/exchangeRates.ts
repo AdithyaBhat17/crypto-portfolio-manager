@@ -8,7 +8,7 @@ export const SUPPORTED_CURRENCIES = {
 export type Currency = keyof typeof SUPPORTED_CURRENCIES;
 
 function isValidCurrency(currency: any): asserts currency is Currency {
-  if (currency in Object.keys(SUPPORTED_CURRENCIES))
+  if (currency && !(currency in SUPPORTED_CURRENCIES))
     throw new TypeError(`${currency} is not supported`);
   return;
 }
